@@ -1,0 +1,42 @@
+syntax = "proto3";
+package dysnomia.services;
+
+enum ServiceKind {
+	DATABASE = 0;
+}
+
+message RegisterRequest {
+	string id = 1;
+	ServiceKind kind = 2;
+	string host = 3;
+	uint32 port = 4;
+}
+
+message RegisterResponse {
+	string id = 1;
+}
+
+message RefreshRequest {
+	string id = 1;
+}
+
+message RefreshResponse {
+	string id = 1;
+}
+
+message LookupRequest {
+	ServiceKind kind = 1;
+}
+
+message LookupResponse {
+	string id = 1;
+	ServiceKind kind = 2;
+	string host = 3;
+	uint32 port = 4;
+}
+
+service LookupService {
+	rpc Register(RegisterRequest) returns (RegisterResponse);
+	rpc Refresh(RefreshRequest) returns (RefreshResponse);
+	rpc Lookup(LookupRequest) returns (LookupResponse);
+}

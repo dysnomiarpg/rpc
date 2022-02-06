@@ -1,3 +1,4 @@
 syntax = "proto3";
 package dysnomia;
 
+import "services.proto";
