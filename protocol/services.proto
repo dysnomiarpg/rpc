@@ -5,7 +5,7 @@ enum ServiceKind {
 	DATABASE = 0;
 }
 
-message RegisterRequest {
+message Service {
 	string id = 1;
 	ServiceKind kind = 2;
 	string host = 3;
@@ -29,14 +29,11 @@ message LookupRequest {
 }
 
 message LookupResponse {
-	string id = 1;
-	ServiceKind kind = 2;
-	string host = 3;
-	uint32 port = 4;
+	repeated Service services = 1;
 }
 
 service LookupService {
-	rpc Register(RegisterRequest) returns (RegisterResponse);
+	rpc Register(Service) returns (RegisterResponse);
 	rpc Refresh(RefreshRequest) returns (RefreshResponse);
 	rpc Lookup(LookupRequest) returns (LookupResponse);
 }
